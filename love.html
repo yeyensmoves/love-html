@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Love</title>
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700&display=swap" rel="stylesheet">
+
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #111;
+        font-family: 'Baloo 2', cursive;
+        overflow: hidden;
+    }
+
+    .box {
+        background: rgb(220, 217, 217);
+        padding: 40px 50px;
+        border-radius: 25px;
+        text-align: center;
+        position: relative;
+        box-shadow: 0 0 40px rgba(249, 1, 100, 0.5);
+        animation: pop 0.4s ease;
+        transition: all 0.3s ease;
+    }
+
+    @keyframes pop {
+        0% { transform: scale(0.6); }
+        100% { transform: scale(1); }
+    }
+
+    h1 {
+        color: #b80679;
+        margin-bottom: 30px;
+        font-size: 36px;
+        text-shadow: 0 3px 10px rgba(0,0,0,0.3);
+    }
+
+    .btn {
+        padding: 15px 35px;
+        border: none;
+        border-radius: 15px;
+        font-size: 22px;
+        font-weight: 700;
+        cursor: pointer;
+        margin: 10px;
+        transition: all 0.3s ease;
+        box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+    }
+
+    #yes {
+        background: linear-gradient(45deg, #ff4d6d, #ff0077);
+        color: #faf9f9;
+    }
+
+    #no {
+        background: #444;
+        color: white;
+        position: relative;
+    }
+
+    /* Hearts */
+    .heart {
+        position: fixed;
+        font-size: 30px;
+        animation: floatUp 2s ease-in forwards;
+        pointer-events: none;
+    }
+
+    @keyframes floatUp {
+        0% { transform: translateY(0) scale(1); opacity: 1; }
+        100% { transform: translateY(-200px) scale(1.5); opacity: 0; }
+    }
+</style>
+</head>
+<body>
+
+<div class="box">
+    <h1>Pwede pa kiss aking binibini? ❤️</h1>
+    <button id="yes" class="btn">YES</button>
+    <button id="no" class="btn">NO</button>
+</div>
+
+<script>
+const yesBtn = document.getElementById("yes");
+const noBtn = document.getElementById("no");
+const box = document.querySelector(".box");
+
+// NO button click: grow YES, shrink NO
+noBtn.addEventListener("click", () => {
+    let yesWidth = yesBtn.offsetWidth;
+    let yesHeight = yesBtn.offsetHeight;
+    let noWidth = noBtn.offsetWidth;
+    let noHeight = noBtn.offsetHeight;
+
+    yesBtn.style.width = yesWidth * 1.2 + "px";
+    yesBtn.style.height = yesHeight * 1.2 + "px";
+    yesBtn.style.fontSize = parseFloat(window.getComputedStyle(yesBtn).fontSize) * 1.2 + "px";
+
+    noBtn.style.width = noWidth * 0.9 + "px";
+    noBtn.style.height = noHeight * 0.9 + "px";
+    noBtn.style.fontSize = parseFloat(window.getComputedStyle(noBtn).fontSize) * 0.9 + "px";
+
+    if(yesBtn.offsetWidth > window.innerWidth * 0.9) {
+        box.innerHTML = `
+            <h1 style="color:white; text-align:center; font-size:60px; text-shadow: 0 4px 20px rgba(0,0,0,0.5);">
+                MWAAAAHHHHHH, I LOVEE YOUUUU❤️❤️
+            </h1>
+        `;
+        for(let i = 0; i < 40; i++){
+            let heart = document.createElement("div");
+            heart.innerHTML = "❤️";
+            heart.classList.add("heart");
+            heart.style.left = Math.random() * window.innerWidth + "px";
+            heart.style.top = Math.random() * window.innerHeight + "px";
+            document.body.appendChild(heart);
+            setTimeout(() => heart.remove(), 2000);
+        }
+    }
+});
+
+// YES button click
+yesBtn.addEventListener("click", () => {
+    box.innerHTML = `
+        <h1 style="color:white; text-align:center; font-size:60px; text-shadow: 0 4px 20px rgba(0,0,0,0.5);">
+            MWAAAAHHHHHH, I LOVEE YOUUUU❤️❤️
+        </h1>
+    `;
+    for(let i = 0; i < 40; i++){
+        let heart = document.createElement("div");
+        heart.innerHTML = "❤️";
+        heart.classList.add("heart");
+        heart.style.left = Math.random() * window.innerWidth + "px";
+        heart.style.top = Math.random() * window.innerHeight + "px";
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 2000);
+    }
+});
+</script>
+
+</body>
+</html>
